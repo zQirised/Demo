@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  SpringBootApi:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: SpringBootApiFunction
+      Handler: com.qirised.lambdaexampledemo.LambdaExampleDemoApplication  # 你的 Handler 全限定名
+      Runtime: java8
+      MemorySize: 1024
+      Timeout: 30
+      CodeUri: target/token-pay-admin-1.0.0.jar            # fat-jar 路径
+      Events:
+        ProxyApi:
+          Type: HttpApi
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
