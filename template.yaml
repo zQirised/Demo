@@ -6,14 +6,14 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: SpringBootApiFunction
-      Handler: com.qirised.lambdaexampledemo.LambdaExampleDemoApplication  # 你的 Handler 全限定名
-      Runtime: java8
+      Handler: com.qirised.lambdaexampledemo.StreamLambdaHandler  # 你的 Handler 全限定名
+      Runtime: java17
       MemorySize: 1024
       Timeout: 30
-      CodeUri: target/token-pay-admin-1.0.0.jar            # fat-jar 路径
+      CodeUri: .         # fat-jar 路径
       Events:
         ProxyApi:
-          Type: HttpApi
+          Type: Api
           Properties:
             Path: /{proxy+}
             Method: ANY
